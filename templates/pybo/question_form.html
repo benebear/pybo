@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">현장사진 등록하기</h5>
+    <form method="post" class="post-form my-3" enctype="multipart/form-data"> <!-- 여기에 enctype을 추가합니다 -->
+        {% csrf_token %}
+        {% include "form_errors.html" %}
+        <div class="mb-3">
+            <label for="subject" class="form-label">현장이름</label>
+            <input type="text" class="form-control" name="subject" id="subject"
+                   value="{{ form.subject.value|default_if_none:'' }}">
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">안전모 미착용 사진</label>
+            <textarea class="form-control" name="content"
+                      id="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">이미지 업로드</label>
+            <input type="file" class="form-control" name="image" id="image"> <!-- 이미지 업로드를 위한 input 필드를 추가합니다 -->
+        </div>
+        <button type="submit" class="btn btn-primary">저장하기</button>
+    </form>
+</div>
+{% endblock %}
